@@ -31,6 +31,12 @@ pages:
               - cohhcarnage
               - christitustech
               - EJ_SA
+          - type: jellyfin-sessions
+            url: URL_TO_YOUR_JELLYFIN_SERVER
+            api-key: YOUR_API_KEY
+            hide-undefined-users: false
+            display-names:
+               "user": "Display Name"
 
       - size: full
         widgets:
