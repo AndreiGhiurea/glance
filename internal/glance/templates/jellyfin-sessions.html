@@ -1,0 +1,50 @@
+{{ template "widget-base.html" . }}
+
+{{ define "widget-content" }}
+<ul class="list list-gap-14 collapsible-container" data-collapse-after="{{ .CollapseAfter }}">
+    {{ range .Sessions }}
+    <li>
+        <div class="{{ if .IsNowPlaying }}jellyfin-session-playing {{ end }}flex gap-10 items-start thumbnail-parent">
+            <div class="jellyfin-session-playing-container" {{ if .IsNowPlaying }} data-popover-type="html"
+                data-popover-position="above" data-popover-margin="0.15rem" data-popover-offset="0.2" {{ end }}>
+                {{ if .IsNowPlaying }}
+                <div data-popover-html>
+                    <img class="jellyfin-poster-preview" src="{{ $.JellyfinURL }}Items/{{ .MediaId }}/Images/Primary/"
+                        loading="lazy" alt="">
+                    <p class="margin-top-10 color-highlight text-truncate-3-lines">{{ .NowPlaying }}</p>
+                </div>
+                {{ end }}
+                <a href="{{ $.JellyfinURL }}" target="_blank" rel="noreferrer">
+                    <img class="jellyfin-session-avatar thumbnail"
+                        src="{{ $.JellyfinURL }}UserImage?userId={{ .UserId }}"
+                        onerror="this.src='data:image/png;base64,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'"
+                        alt="" loading="lazy">
+                </a>
+            </div>
+            <div class="min-width-0">
+                <a href="{{ $.JellyfinURL }}"
+                    class="size-h3{{ if .IsNowPlaying }} color-highlight{{ end }} block text-truncate" target="_blank"
+                    rel="noreferrer">{{ .DisplayName }}</a>
+                {{ if .IsNowPlaying }}
+                <a class="text-truncate block" href="{{ $.JellyfinURL }}web/#/details?id={{ .MediaId }}" target="_blank"
+                    rel="noreferrer">{{ .NowPlaying }}</a>
+                <ul class="list-horizontal-text">
+                    <li>{{ .Runtime }}</li>
+                    <li>{{ .RuntimeProgress }}%</li>
+                    <li>{{ .PlayMethod }}</li>
+                    <li>{{ .Client }}</li>
+                    <li>{{ .DeviceName}}</li>
+                </ul>
+                {{ else }}
+                <div>Not Playing</div>
+                <ul class="list-horizontal-text">
+                    <li>{{ .Client }}</li>
+                    <li>{{ .DeviceName}}</li>
+                </ul>
+                {{ end }}
+            </div>
+        </div>
+    </li>
+    {{ end }}
+</ul>
+{{ end }}
