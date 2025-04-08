@@ -38,7 +38,10 @@ jobs:
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
-          images: AndreiGhiurea/glance
+          images: andreighiurea/glance
+          tags: |
+            type=ref,event=branch
+            type=raw,value=latest
 
       - name: Build and push Docker image
         id: push
@@ -53,6 +56,6 @@ jobs:
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v2
         with:
-          subject-name: index.docker.io/AndreiGhiurea/glance
+          subject-name: index.docker.io/andreighiurea/glance
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
