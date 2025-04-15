@@ -97,7 +97,7 @@ type jellyfinSessionsResponse struct {
 	NowPlayingItem NowPlayingItem `json:"NowPlayingItem"`
 }
 
-const jellyfinSessionsEndpoint = "Sessions"
+const jellyfinSessionsEndpoint = "Sessions?ActiveWithinSeconds=960"
 const jellyfinAuthorizationFmt = `MediaBrowser Token="%s"`
 
 func fetchSessionsFromJellyfin(widget *jellyfinSessionsWidget) (jellyfinSessionList, error) {
