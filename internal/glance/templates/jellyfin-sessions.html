@@ -2,6 +2,7 @@
 
 {{ define "widget-content" }}
 <ul class="list list-gap-14 collapsible-container" data-collapse-after="{{ .CollapseAfter }}">
+    {{ if .Sessions | len }}
     {{ range .Sessions }}
     <li>
         <div class="{{ if .IsNowPlaying }}jellyfin-session-playing {{ end }}flex gap-10 items-start thumbnail-parent">
@@ -43,6 +44,13 @@
                 </ul>
                 {{ end }}
             </div>
+        </div>
+    </li>
+    {{ end }}
+    {{ else }}
+    <li>
+        <div class="text-center">
+            <p class="size-h3 color-muted">No active sessions at the moment.</p>
         </div>
     </li>
     {{ end }}
